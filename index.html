@@ -1,0 +1,191 @@
+<!DOCTYPE html><html xmlns:z="ignored" id="ng-app" ng-app="sts" class="plr" data-scrapbook-source="https://login.serverdata.net/user/Account/Login?ReturnUrl=%2Fuser%2Fwsfed%3Fwa%3Dwsignin1.0%26wtrealm%3Dhttps%253a%252f%252feast-2fa.exch082.serverdata.net%252fowa%252f%26wctx%3Drm%253d0%2526id%253dpassive%2526ru%253d%25252fowa%25252f%25253flogin_hint%25253dedecastro%252540courthousegardens.com%26wct%3D2026-02-02T08%253a31%253a16Z" data-scrapbook-create="20260202083524561" data-scrapbook-title="Sign in to your account"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Sign in to your account</title>
+    
+
+        <link rel="icon" type="image/x-icon" href="partner_favicon.ico">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+
+
+
+
+
+    
+
+    
+    
+        
+<link rel="stylesheet" type="text/css" href="login.min.css">
+        
+
+    
+    
+
+    
+<script data-scrapbook-elem="custom-elements-loader">(function (names) { if (!customElements) { return; } for (const name of names) { customElements.define(name, class CustomElement extends HTMLElement {}); } })(["z:circle-loader"])</script></head>
+<body class="body" ng-controller="loginStep2Ctrl as ctrl">
+    <div class="login-page-wrapper">
+        <div class="page-loading" ng-if="ctrl.loading" ng-cloak="">
+            <z:circle-loader type="spinner">
+            </z:circle-loader>
+        </div>
+        <div class="login-logo">
+            <div class="login-logo-img"></div>
+        </div>
+        <div class="text-center mb8" ng-hide="ctrl.maintenance || ctrl.brandBlocking.enabled || ctrl.userLocked || ctrl.connection.error || ctrl.ie10 || ctrl.retry" ng-cloak="">
+            Please sign in to access this service
+        </div>
+        <div class="login-message" ng-if="ctrl.maintenance" ng-cloak="">
+            
+
+<div class="login-maintenance message-block">
+    
+<img src="error-occured-ico.svg" class="icon" width="16" height="16" alt="Error">
+<div class="message">
+    <p class="lh16">The login service is temporarily unavailable, normal service will be resumed shortly</p>
+</div>
+
+</div>
+        </div>
+        <div class="login-message" ng-if="ctrl.brandBlocking.enabled" ng-cloak="">
+            
+
+<div class="brand-blocking message-block">
+    
+<img src="error-occured-ico.svg" class="icon" width="16" height="16" alt="Error">
+<div class="message">
+    <p class="lh16">This {{ ctrl.brandBlocking.blockedBrand }} app is no longer available as part of the branding transition. Please sign in using the new {{ ctrl.brandBlocking.allowedBrand }} app to continue: <br><a ng-href="{{ ctrl.brandBlocking.allowedBrandLink }}">{{ ctrl.brandBlocking.allowedBrandLink }}</a></p>
+</div>
+
+</div>
+
+        </div>
+        <div class="login-message" ng-if="ctrl.connection.error" ng-cloak="">
+            
+
+<div class="no-internet-connection message-block">
+    
+<img src="error-occured-ico.svg" class="icon" width="16" height="16" alt="Error">
+<div class="message">
+    <p class="lh16">No connection detected. Please check your network and try again</p>
+</div>
+
+</div>
+        </div>
+        <div class="login-message" ng-if="ctrl.userLocked" ng-cloak="">
+            
+<div class="login-locked message-block">
+    <img src="error-occured-ico.svg" class="icon" width="16" height="16" alt="Error">
+    <div class="message">
+        <p class="lh16"><strong>Your account has been locked after multiple failed login attempts, please reset your password to unlock your account</strong></p>
+    </div>
+</div>
+        </div>
+        <div class="login-message" ng-if="ctrl.isRecaptchaUnavailable()" ng-cloak="">
+            
+
+<div class="captcha-unavailable message-block">
+    
+<img src="error-occured-ico.svg" class="icon" width="16" height="16" alt="Error">
+<div class="message">
+    <p class="lh16">Captcha is currently unavailable, please try again later</p>
+</div>
+
+</div>
+        </div>
+        <div class="login-message">
+            
+<div class="login-update-browser message-block" id="login-update-browser-ie10" style="display: none">
+    
+<img src="error-occured-ico.svg" class="icon" width="16" height="16" alt="Error">
+<div class="message">
+    <p class="lh16">Your browser is not supported. These services are optimized for modern browsers and you may experience some unexpected behavior</p>
+</div>
+
+</div>
+
+        </div>
+            <div class="login-message">
+                
+
+<div class="login-update-browser message-block" id="login-update-browser-ie" style="display: none">
+    <p class="lh16 mb8">Internet Explorer is not officially supported and your experience may not be optimal. For the best experience, please upgrade your browser.</p>
+</div>
+
+            </div>
+        <div class="login-message" ng-if="ctrl.retry" ng-cloak="">
+            
+
+<div class="no-internet-connection message-block">
+    <img src="error-occured-ico.svg" class="icon" width="16" height="16" alt="Error">
+    <div class="message">
+        <p class="lh16" id="login-retry-message">An error occurred, please <a>try again</a></p>
+    </div>
+</div>
+
+        </div>
+        <main class="login-form-container">
+            <form method="post" class="zen-form" name="ctrl.loginForm" ng-submit="ctrl.submit()" novalidate="" z-validate-form="" autocomplete="off" enable-enter="">
+                <div class="z-validation-input">
+                    <input class="form-input login-form-field mt0" id="login" name="login" type="text" placeholder="Email" ng-model="ctrl.userName" ng-change="ctrl.invalidCredentials=false;ctrl.showError=false;" z-validate-field="{'validEmail': !ctrl.validEmail()}" ng-blur="ctrl.showError=!ctrl.userName || !ctrl.validEmail()" required="" autocomplete="off" maxlength="100" value="">
+                    <div class="validation-wrapper mt4" ng-cloak="" ng-if="ctrl.showError">
+                        <div class="error-icon mr4"></div>
+                        <div id="error-user-name-required" error="required" field="login" ng-if="!ctrl.userName">
+                            Email required
+                        </div>
+                        <div id="error-user-name-must-be-valid-email" error="validEmail" field="login" class="m-nowrap" ng-if="ctrl.userName &amp;&amp; !ctrl.validEmail()">
+                            Valid email address required
+                        </div>
+                    </div>
+                </div>
+                <div class="z-validation-input mb0">
+                    <input class="form-input login-form-field mt0" type="password" id="password" name="password" placeholder="Password" ng-model="ctrl.password" ng-change="ctrl.invalidCredentials=false;ctrl.showErrorPassword=false;" z-validate-field="required" ng-blur="ctrl.showErrorPassword=!ctrl.password" required="" autocomplete="new-password" maxlength="100">
+                    <div class="validation-wrapper mt4" ng-cloak="" ng-if="ctrl.showErrorPassword">
+                        <div class="error-icon mr4"></div>
+                        <div id="error-password-required" error="required" field="password" ng-if="!ctrl.password">
+                            Password required
+                        </div>
+                    </div>
+                </div>
+                <div class="validation-wrapper mt4" ng-show="ctrl.invalidCredentials" ng-cloak="">
+                    <div class="error-icon mr4"></div>
+                    <div id="error-divin-or-password-incorrect">
+                        Email or password is incorrect
+                    </div>
+                </div>
+                <div class="mt8 mb16">
+                    <div class="login-form-forget">
+                        <a ng-click="ctrl.forgotPasswordClick()" ng-disabled="ctrl.connection.offline" disabled="disabled" tabindex="0">
+                            Forgot password?
+                        </a>
+                    </div>
+                </div>
+                
+
+    <div class="recaptcha" ng-show="ctrl.isRecaptchaRequired()" data-badge="inline" data-sitekey="6LdlcXwUAAAAAL_rZ1MnnaQRGFZt2ptHSdo2gjNx" data-callback="recaptchaSuccessCallback"></div>
+
+                <button id="login-submit" type="submit" class="login-submit" ng-disabled="ctrl.connection.offline" disabled="disabled" tabindex="0">
+                    Sign in
+                </button>
+            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8LBNA1g6d-9Bvh4IXRDsIisXaC_NXrJGBTn8HNVuOlio5-xdhlwnsSywGRrlmEaj0hDK0D9hqF9ZUpqPJnOk7o2hqju59Wf4wX7-JbVkmz-AbqnQRtf7ta7mMPAMSqwyQrmwTsKbL-DZ46uX7SPrqWU"></form>
+        </main>
+    </div>
+    
+    
+
+
+    
+
+
+    
+
+    <link rel="stylesheet" type="text/css" href="owa_plr.min.css">
+
+        
+
+
+
+</body></html>
